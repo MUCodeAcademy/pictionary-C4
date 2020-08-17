@@ -35,11 +35,13 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameService.newTopic(this.gameInfo.gameId);
   }
 
+
   ngOnInit(): void {
     this.socket.joinGame(this.actr.snapshot.params.gameId);
     let gameId = this.actr.snapshot.params.gameId;
-    this.gameService.gameInfo(gameId).subscribe((val) => {
-
+    this.gameService.gameInfo(gameId).subscribe((val: any) => {
+      console.log(val);
+      
       this.gameInfo = {
         gameId: val.gameId,
         artist: val.currentArtist,

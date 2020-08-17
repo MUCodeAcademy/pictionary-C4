@@ -43,7 +43,8 @@ export class GameService {
 
     newTopic(gameId){
       this.FS.collection('pictionary').doc(gameId).update({
-        currentTopic: this.randomTopic});
+        currentTopic: topics[Math.floor(Math.random() * topics.length)]});
+          
     }
  
   // Join game function
@@ -94,9 +95,9 @@ export class GameService {
   }
 
   // Win point function
-  // Close topic
-  // Assign point to correct player , update state
-  // update scoreboard
+  turnWin(){
+
+  }
 
   // New round function(s)
   // clear the sketchpad
@@ -111,9 +112,9 @@ export class GameService {
 
 gameInfo(gameId){
     let game = this.FS.collection('pictionary').doc(`${gameId}`)
-    return game.get().pipe(
+    return game.valueChanges().pipe(
       map(val => {   
-      return val.data()}
+      return val}
       ))
     }
   }
