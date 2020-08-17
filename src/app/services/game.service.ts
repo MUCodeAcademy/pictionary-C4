@@ -108,13 +108,13 @@ export class GameService {
   // navigate to home - dialog box?
 
 
-  get Artist$ (gameId){
-    let game = this.FS.collection('pictionary').doc(`${gameId}`)
-    game.get().subscribe(
-      val => {
-        let data = val.data();
-        let currentArtist = data.currentArtist.displayName;
-        return currentArtist
-      })
-    }
-}
+//   get Artist$ (gameId){
+//     let game = this.FS.collection('pictionary').doc(`${gameId}`)
+//     game.get().subscribe(
+//       val => {
+//         let data = val.data();
+//         let currentArtist = data.currentArtist.displayName;
+//         return currentArtist
+//       })
+//     }
+// }
