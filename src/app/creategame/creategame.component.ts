@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../services/game.service';
 import { Player } from "../interfaces/player.interface"
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -27,14 +28,17 @@ export class CreategameComponent implements OnInit {
   scoreConfig: number = 15;
   roundConfig: number = 3;
   host: Player;
-  constructor(private gameService: GameService) { }
+  
+  constructor(private gameService: GameService, private auth: AngularFireAuth) { }
 
 
   createGame(){
-    this.gameSettings = {creatorName: this.creatorName, maxRounds: this.roundConfig, maxScore: this.scoreConfig }
+    this.gameSettings = {creatorName: this.creatorName, maxRounds: this.roundConfig, maxScore: this.scoreConfig, currentRound: 1}
     this.host = {displayName: this.creatorName, score: 0, isArtist: true, isHost: true}    
     this.gameService.createGame(this.gameSettings, this.host)
   }
-  ngOnInit(): void {  }
+  ngOnInit(): void {  
+    this.auth.user.subscribe(user => this.creatorName = user ? user.displayName : '')
+  }
 
 }

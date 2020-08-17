@@ -36,7 +36,7 @@ export class GameService {
         gameId: this.gameId,
         validGameUntilTime: new Date(),
         gameConfig,
-        users: [host]
+        users: []
       }).then(res => this.router.navigate([`/game/${this.gameId}`]) )
       // TODO Save gameConfig to FireStore
     }
@@ -112,6 +112,8 @@ export class GameService {
 gameInfo(gameId){
     let game = this.FS.collection('pictionary').doc(`${gameId}`)
     return game.get().pipe(
-      map(val => val.data()))
+      map(val => {   
+      return val.data()}
+      ))
     }
   }
