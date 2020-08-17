@@ -10,7 +10,7 @@ import topics from '../shared/topics.arrays';
   providedIn: 'root'
 })
 export class GameService {
-
+  gameInfo = {}
   db = this.FS.collection('pictionary')
   gameId: string
   randomTopic: string = topics[Math.floor(Math.random() * topics.length)]; 
@@ -28,7 +28,7 @@ export class GameService {
       this.socketService.createGame(this.gameId);
       console.log(this.gameId);
 
-      this.FS.collection('pictionary').add({
+      this.FS.collection('pictionary').doc(`${this.gameId}`).set({
         createdTime: new Date(),
         currentArtist: host,
         currentTopic: this.randomTopic,
@@ -107,4 +107,14 @@ export class GameService {
   // declare game winner
   // navigate to home - dialog box?
 
+
+  get Artist$ (gameId){
+    let game = this.FS.collection('pictionary').doc(`${gameId}`)
+    game.get().subscribe(
+      val => {
+        let data = val.data();
+        let currentArtist = data.currentArtist.displayName;
+        return currentArtist
+      })
+    }
 }

@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class GameComponent implements OnInit, OnDestroy{
 
   displayName: string = '';
-  savedName: boolean = false;
+  savedName: boolean = true;
   currentGame: string;
 
   constructor(private socket: SocketService, private router: Router, private gameService: GameService, private actr: ActivatedRoute) { }
@@ -32,8 +32,8 @@ export class GameComponent implements OnInit, OnDestroy{
     this.gameService.updateArtist(gameId)
   }
 
-  newTopic(currentGame){
-    this.gameService.newTopic(currentGame);
+  newTopic(){
+    this.gameService.newTopic(this.currentGame);
   }
 
   ngOnInit(): void {

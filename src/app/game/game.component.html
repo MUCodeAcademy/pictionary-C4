@@ -1,4 +1,4 @@
-<div *ngIf="!savedName" class="parent topMargin">
+<!-- <div *ngIf="!savedName" class="parent topMargin">
     <p>Please enter a Display Name</p>
     <form class="example-form">
         <mat-form-field class="example-full-width">
@@ -10,7 +10,7 @@
 
 
     <button mat-raised-button color="primary" class="smallButton" (click)="savePlayer()">Submit</button>
-</div>
+</div> -->
 
 <ng-container *ngIf="savedName">
 <div class="container">
@@ -27,5 +27,5 @@
     <app-sketchpad class="fb-20"></app-sketchpad>
     <app-scoreboard class="fb-20"></app-scoreboard>
 </div>
-<button mat-raised-button color="warn" (click)="newTopic(currentGame)">New Topic</button>
+<button mat-raised-button color="warn" (click)="newTopic()">New Topic</button>
 </ng-container>

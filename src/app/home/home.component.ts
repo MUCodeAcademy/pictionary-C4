@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   roomCode: string
 
   joinGame(){
-    this.gameService.joinGame(this.roomCode)
+    this.gameService.joinGame(this.roomCode);
+    this.gameService.newPlayer(this.displayName, this.roomCode)
   }
 
   displayName: string = '';  
