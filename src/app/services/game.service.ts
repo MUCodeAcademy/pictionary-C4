@@ -5,12 +5,13 @@ import { AngularFirestore } from "@angular/fire/firestore"
 import * as firebase from 'firebase';
 import { SocketService } from './socket.service';
 import topics from '../shared/topics.arrays';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  gameInfo = {}
+  // gameInfo = {}
   db = this.FS.collection('pictionary')
   gameId: string
   randomTopic: string = topics[Math.floor(Math.random() * topics.length)]; 
@@ -91,7 +92,7 @@ export class GameService {
       }
     )
   }
-}
+
   // Win point function
   // Close topic
   // Assign point to correct player , update state
@@ -108,13 +109,9 @@ export class GameService {
   // navigate to home - dialog box?
 
 
-//   get Artist$ (gameId){
-//     let game = this.FS.collection('pictionary').doc(`${gameId}`)
-//     game.get().subscribe(
-//       val => {
-//         let data = val.data();
-//         let currentArtist = data.currentArtist.displayName;
-//         return currentArtist
-//       })
-//     }
-// }
+gameInfo(gameId){
+    let game = this.FS.collection('pictionary').doc(`${gameId}`)
+    return game.get().pipe(
+      map(val => val.data()))
+    }
+  }

@@ -12,33 +12,39 @@ import { Observable } from 'rxjs';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, OnDestroy{
-
+  gameId: string;
   displayName: string = '';
   savedName: boolean = true;
-  currentGame: string;
+  artist: Player;
 
-  constructor(private socket: SocketService, private router: Router, private gameService: GameService, private actr: ActivatedRoute) { }
+  constructor(private socket: SocketService, private router: Router, private gameService: GameService, private actr: ActivatedRoute) {
+   
+   }
+  
 
   savePlayer(){
-    let gameId = this.actr.snapshot.params.gameId
-    console.log(gameId);
+
+    console.log(this.gameId);
     console.log(this.displayName);
     this.savedName = true
-    this.gameService.newPlayer(this.displayName, gameId)
+    this.gameService.newPlayer(this.displayName, this.gameId)
   }
 
   assignArtist(){
-    let gameId = this.actr.snapshot.params.gameId
-    this.gameService.updateArtist(gameId)
+    this.gameService.updateArtist(this.gameId)
   }
 
   newTopic(){
-    this.gameService.newTopic(this.currentGame);
+    this.gameService.newTopic(this.gameId);
   }
 
   ngOnInit(): void {
     this.socket.joinGame(this.actr.snapshot.params.gameId);
-    this.currentGame = this.actr.snapshot.params.gameId;
+    this.gameId = this.actr.snapshot.params.gameId;
+    this.gameService.gameInfo(this.gameId).subscribe(val => {
+      this.artist = val.currentArtist;
+      
+    })
   }
 
   ngOnDestroy(): void{
