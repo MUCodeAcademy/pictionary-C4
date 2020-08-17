@@ -91,7 +91,7 @@ export class GameService {
       }
     )
   }
-
+}
   // Win point function
   // Close topic
   // Assign point to correct player , update state
