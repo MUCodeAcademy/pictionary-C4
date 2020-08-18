@@ -45,6 +45,7 @@ import { DisplaynamestoreService } from './services/displaynamestore.service'
   ],
   providers: [
     AuthenticationService,
+    DisplaynamestoreService
   ],
   bootstrap: [AppComponent]
 })
