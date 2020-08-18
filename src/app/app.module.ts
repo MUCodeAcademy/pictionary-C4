@@ -18,6 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthenticationService } from './services/authentication.service';
 import { AppComponent } from './app.component';
+import { DisplaynamestoreService } from './services/displaynamestore.service'
 
 
 @NgModule({
